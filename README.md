@@ -15,6 +15,12 @@ Go REST Starter is my own implementation of a REST API boilerplate / starter pro
 
 ---
 
-## Starting the Server
+## Getting Started
+
+### Starting the Server
 
 To start the server, run `go run ./src/main.go` from the project's root directory.
+
+### Adding Routes
+
+Add route handlers in `src/api`, then add the appropriate routes in `src/router/routes.go`.

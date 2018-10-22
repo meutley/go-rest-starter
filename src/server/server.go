@@ -6,13 +6,22 @@ import (
 	"net/http"
 	"os"
 
+	"../api/root"
 	"../router"
 	"github.com/gorilla/mux"
 )
 
 // Server represents a server instance.
 type Server struct {
-	router mux.Route
+	router *mux.Router
+}
+
+// configureRouter configures the router for the Server instance.
+func (s *Server) configureRouter() {
+	var appRoutes = make(router.Routes, 0)
+	appRoutes = append(appRoutes, root.Routes...)
+
+	s.router = router.BuildRouter(appRoutes)
 }
 
 // Start initializes the web server and starts listening on a port.
@@ -22,6 +31,6 @@ func (s *Server) Start() {
 		port = "8080"
 	}
 
-	router := router.BuildRouter(router.AppRoutes)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), router))
+	s.configureRouter()
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), s.router))
 }
