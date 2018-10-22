@@ -24,3 +24,13 @@ To start the server, run `go run ./src/main.go` from the project's root director
 ### Adding Routes
 
 Add route handlers in `src/api`, then add the appropriate routes in `src/router/routes.go`.
+
+---
+
+## Things I Am Unsure Of
+
+* The error handler / wrapper I implemented (`src/router/error_wrapper.go`) is the best I could do, without knowing more about Go and Mux. If you know a better way to do it, feel free to create a Pull Request!
+
+## Future Goals
+
+* I am currently researching how to efficiently manage database connections in Go. Once I figure it out, or I at least have a more comfortable grasp on it, I will be implementing some database functionality.
