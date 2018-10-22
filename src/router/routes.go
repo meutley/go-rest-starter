@@ -4,6 +4,7 @@ import (
 	"net/http"
 )
 
+// RouteHandler is a custom route handler function that can return an error.
 type RouteHandler func(w http.ResponseWriter, r *http.Request) error
 
 // Route defines an API route via various configurable parameters.

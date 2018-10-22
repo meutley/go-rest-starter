@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 
+	"../database"
 	"../api/root"
 	"../router"
 	"github.com/gorilla/mux"
@@ -17,11 +18,19 @@ type Server struct {
 }
 
 // configureRouter configures the router for the Server instance.
-func (s *Server) configureRouter() {
+func (s *Server) configureRouter() error {
 	var appRoutes = make(router.Routes, 0)
 	appRoutes = append(appRoutes, root.Routes...)
 
-	s.router = router.BuildRouter(appRoutes)
+	var dbc database.DatabaseContract = database.InMemory{}
+	db := dbc.(database.InMemory)
+	err := db.Connect(nil)
+	if err != nil {
+		return err
+	}
+
+	s.router = router.BuildRouter(appRoutes, db)
+	return nil
 }
 
 // Start initializes the web server and starts listening on a port.
@@ -31,6 +40,6 @@ func (s *Server) Start() {
 		port = "8080"
 	}
 
-	s.configureRouter()
+	log.Fatal(s.configureRouter())
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), s.router))
 }
