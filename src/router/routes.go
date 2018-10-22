@@ -4,13 +4,15 @@ import (
 	"net/http"
 )
 
+type RouteHandler func(w http.ResponseWriter, r *http.Request) error
+
 // Route defines an API route via various configurable parameters.
 type Route struct {
 	Name              string
 	Method            string
 	RootPattern       string
 	PatternParams     string
-	HandlerFunc       http.HandlerFunc
+	HandlerFunc       RouteHandler
 	ChildRoutes       []Route
 	WithParentPattern string
 }

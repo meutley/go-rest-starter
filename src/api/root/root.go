@@ -7,9 +7,10 @@ import (
 	"../../router"
 )
 
-func getRoot(w http.ResponseWriter, r *http.Request) {
+func getRoot(w http.ResponseWriter, r *http.Request) error {
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode("OK")
+	return nil
 }
 
 var Routes = router.Routes{
@@ -20,7 +21,7 @@ var Routes = router.Routes{
 		RootPattern:       "/root",
 		PatternParams:     "",
 		HandlerFunc:       getRoot,
-		ChildRoutes:       nestedRoutes,
+		ChildRoutes:       append(nestedRoutes, badRoutes...),
 		WithParentPattern: "",
 	},
 }

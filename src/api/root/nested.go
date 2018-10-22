@@ -7,9 +7,10 @@ import (
 	"../../router"
 )
 
-func getNested(w http.ResponseWriter, r *http.Request) {
+func getNested(w http.ResponseWriter, r *http.Request) error {
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode("root / nested")
+	return nil
 }
 
 var nestedRoutes = router.Routes{

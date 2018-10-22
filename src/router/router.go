@@ -16,17 +16,20 @@ func BuildRouter(routes Routes) *mux.Router {
 		// Parent route handler
 		fullPattern := path.Join(parentRoute.RootPattern, parentRoute.PatternParams)
 		sub.
-			HandleFunc(fullPattern, parentRoute.HandlerFunc).
+			HandleFunc(fullPattern, errorWrapper(parentRoute.HandlerFunc)).
 			Name(parentRoute.Name).
 			Methods(parentRoute.Method)
 
 		// Build child routes
 		for _, child := range parentRoute.ChildRoutes {
-			childPattern := path.Join(parentRoute.RootPattern, child.WithParentPattern, child.RootPattern)
+			childPattern := path.Join(parentRoute.RootPattern,
+				child.WithParentPattern,
+				child.RootPattern,
+				child.PatternParams)
 			childName := path.Join(parentRoute.Name, child.Name)
 
 			sub.
-				HandleFunc(childPattern, child.HandlerFunc).
+				HandleFunc(childPattern, errorWrapper(child.HandlerFunc)).
 				Name(childName).
 				Methods(child.Method)
 		}
