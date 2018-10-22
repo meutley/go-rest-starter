@@ -9,15 +9,24 @@ import (
 )
 
 func get400Error(w http.ResponseWriter, r *http.Request) error {
-	return &common.StatusError{400, errors.New("api/root/bad/400 generates a 400 error response")}
+	return &common.StatusError{
+		Status: 400,
+		Err:    errors.New("api/root/bad/400 generates a 400 error response"),
+	}
 }
 
 func get404Error(w http.ResponseWriter, r *http.Request) error {
-	return &common.StatusError{404, errors.New("api/root/bad/400 generates a 404 error response")}
+	return &common.StatusError{
+		Status: 404,
+		Err:    errors.New("api/root/bad/400 generates a 404 error response"),
+	}
 }
 
 func get500Error(w http.ResponseWriter, r *http.Request) error {
-	return &common.StatusError{500, errors.New("api/root/bad/400 generates a 500 error response")}
+	return &common.StatusError{
+		Status: 500,
+		Err:    errors.New("api/root/bad/400 generates a 500 error response"),
+	}
 }
 
 var badRoutes = router.Routes{
