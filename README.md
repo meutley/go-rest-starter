@@ -52,4 +52,6 @@ To start the server, run `go run ./src/main.go` from the project's root director
 
 ## Future Goals
 
-* I am currently researching how to efficiently manage database connections in Go. Once I figure it out, or I at least have a more comfortable grasp on it, I will be implementing some database functionality.
+* ~~I am currently researching how to efficiently manage database connections in Go. Once I figure it out, or I at least have a more comfortable grasp on it, I will be implementing some database functionality.~~
+
+* I really need to write some unit tests before I add any more functionality. Once I do, I will feel more comfortable extending the functionality.
