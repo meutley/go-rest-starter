@@ -9,6 +9,6 @@ type Queryable interface {
 }
 
 // DataSet represents a set of data (Queryable objects).
-type DataSet struct {
-	Models []Queryable
+type DataSet interface {
+	Queryable
 }
