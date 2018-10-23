@@ -15,7 +15,7 @@ func getRoot(w http.ResponseWriter, r *http.Request) error {
 }
 
 func getUser1(w http.ResponseWriter, r *http.Request) error {
-	db := router.GetDatabaseFromContext(r)
+	db := common.GetDatabaseFromContext(r)
 	u, err := db.FindUser(1)
 	if err != nil {
 		return err

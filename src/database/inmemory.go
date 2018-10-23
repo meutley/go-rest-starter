@@ -3,7 +3,7 @@ package database
 import "./model"
 
 // InMemory is an in-memory database example, for the sake of testing.
-type InMemory struct{
+type InMemory struct {
 	Users model.UserDataSet
 }
 

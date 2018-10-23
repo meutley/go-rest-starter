@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"os"
 
-	"../database"
 	"../api/root"
+	"../database"
 	"../router"
 	"github.com/gorilla/mux"
 )
@@ -22,8 +22,7 @@ func (s *Server) configureRouter() error {
 	var appRoutes = make(router.Routes, 0)
 	appRoutes = append(appRoutes, root.Routes...)
 
-	var dbc database.DatabaseContract = database.InMemory{}
-	db := dbc.(database.InMemory)
+	var db database.DatabaseContract = &database.InMemory{}
 	err := db.Connect(nil)
 	if err != nil {
 		return err
@@ -40,6 +39,8 @@ func (s *Server) Start() {
 		port = "8080"
 	}
 
-	log.Fatal(s.configureRouter())
+	if err := s.configureRouter(); err != nil {
+		log.Fatal(err)
+	}
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), s.router))
 }

@@ -1,4 +1,4 @@
-package router
+package middleware
 
 import (
 	"net/http"
@@ -6,7 +6,7 @@ import (
 	"../common"
 )
 
-func errorWrapper(h RouteHandler) func(w http.ResponseWriter, r *http.Request) {
+func ErrorWrapper(h common.RouteHandler) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		err := h(w, r)
 		if err != nil {
